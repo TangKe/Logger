@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/record"
+        android:icon="@drawable/logger_ic_action_record"
+        android:title="@string/logger_action_record"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action"
+        android:title="@string/logger_action_action"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/logger_ic_action_filter"
+        android:title="@string/logger_action_filter"
+        android:visible="false"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/clearFilter"
+                android:title="@string/logger_action_clear_filter"/>
+            <group
+                android:id="@+id/filterGroup">
+                <item
+                    android:id="@+id/date"
+                    android:icon="@drawable/logger_ic_action_date"
+                    android:title="@string/logger_action_date"/>
+            </group>
+        </menu>
+    </item>
+</menu>

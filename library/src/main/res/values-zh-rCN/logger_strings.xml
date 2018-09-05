@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">lender-toolkit-logger</string>
+
+    <string name="logger_log_status_start">开始</string>
+    <string name="logger_log_status_end">结束</string>
+    <string name="logger_log_status_send">发送</string>
+    <string name="logger_log_status_tracing">正在记录</string>
+    <string name="logger_log_status_ready">准备中…</string>
+
+    <string name="logger_log_record_not_create">你还没有生成日志文件</string>
+    <string name="logger_log_title_log_manage">日志管理</string>
+    <string name="logger_action_action">操作</string>
+    <string name="logger_action_filter">筛选</string>
+    <string name="logger_action_record">记录</string>
+    <string name="logger_action_date">日期</string>
+    <string name="logger_action_clear_filter">清空筛选</string>
+    <string name="logger_action_open">打开目录</string>
+    <string name="logger_action_delete">删除</string>
+    <string name="logger_action_share">分享</string>
+    <string name="logger_title_view_file">请选择打开方式</string>
+    <string name="logger_title_send_file">请选择发送方式</string>
+
+    <string name="logger_action_select_all">全选</string>
+    <string name="logger_action_selected_file_count">计数</string>
+    <string name="logger_action_unselect_all">取消全选</string>
+
+    <string name="logger_action_trace_log">抓取的日志</string>
+    <string name="logger_action_continued_log">持续记录的日志</string>
+    <string name="logger_log_file_name_pattern">yyyy年MM月dd日HH时mm分ss秒</string>
+    <string name="logger_continued_log_file_name_pattern">yyyy年MM月dd日</string>
+</resources>

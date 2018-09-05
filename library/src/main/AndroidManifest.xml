@@ -1,0 +1,26 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ke.tang.logger">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application>
+
+        <service android:name=".LoggerService" />
+        <provider
+            android:name=".LoggerFileProvider"
+            android:authorities="${applicationId}.logger"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/logger_files" />
+        </provider>
+
+        <activity
+            android:name=".ui.activity.LogManageActivity"
+            android:label="@string/logger_log_title_log_manage"
+            android:theme="@style/Theme.AppCompat.Light" />
+
+    </application>
+</manifest>

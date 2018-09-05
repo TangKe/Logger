@@ -1,2 +1,2 @@
 # Logger
-Collect Android logcat
+Collect and manage Android logcat log automatically

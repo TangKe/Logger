@@ -1,0 +1,29 @@
+<resources>
+    <string name="logger_log_status_start">Start</string>
+    <string name="logger_log_status_end">End</string>
+    <string name="logger_log_status_send">Send</string>
+    <string name="logger_log_status_tracing">Tracing</string>
+    <string name="logger_log_status_ready">Preparing</string>
+
+    <string name="logger_log_record_not_create">No log trace file found</string>
+    <string name="logger_log_title_log_manage">Log Manage</string>
+    <string name="logger_action_action">Action</string>
+    <string name="logger_action_filter">Filter</string>
+    <string name="logger_action_record">Record</string>
+    <string name="logger_action_date">Date</string>
+    <string name="logger_action_clear_filter">Clear filter</string>
+    <string name="logger_action_open">Open directory</string>
+    <string name="logger_action_delete">Delete</string>
+    <string name="logger_action_share">Share</string>
+    <string name="logger_title_view_file">Please select app to open this log trace file</string>
+    <string name="logger_title_send_file">Please select app to send this log trace file</string>
+
+    <string name="logger_action_select_all">Select all</string>
+    <string name="logger_action_selected_file_count">Count</string>
+    <string name="logger_action_unselect_all">Deselect all</string>
+
+    <string name="logger_action_trace_log">Trace log</string>
+    <string name="logger_action_continued_log">Continued record log</string>
+    <string name="logger_log_file_name_pattern">yyyy-MM-dd HH:mm:ss</string>
+    <string name="logger_continued_log_file_name_pattern">yyyy-MM-dd</string>
+</resources>

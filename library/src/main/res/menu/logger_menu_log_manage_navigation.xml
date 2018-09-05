@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/traceLog"
+        android:icon="@drawable/logger_ic_folder"
+        android:title="@string/logger_action_trace_log"/>
+
+    <item
+        android:id="@+id/continuedLog"
+        android:icon="@drawable/logger_ic_folder"
+        android:title="@string/logger_action_continued_log"/>
+</menu>
