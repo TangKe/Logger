@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ke.tang.logger.R;
+import ke.tang.logger.util.Common;
 import ke.tang.logger.util.Intents;
 
 /**
@@ -13,17 +15,20 @@ import ke.tang.logger.util.Intents;
  */
 
 public class LogFileViewHolder extends AbstractViewHolder<FileItem> implements View.OnClickListener {
-    public TextView mText;
+    public TextView mName;
+    private TextView mIsCurrentContinuedLogFile;
 
     public LogFileViewHolder(Context context, ViewGroup parent) {
-        super(context, LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false));
+        super(context, LayoutInflater.from(context).inflate(R.layout.logger_layout_log_file_list_item, parent, false));
         itemView.setOnClickListener(this);
-        mText = (TextView) itemView;
+        mName = itemView.findViewById(R.id.name);
+        mIsCurrentContinuedLogFile = itemView.findViewById(R.id.isCurrentContinuedLogFile);
     }
 
     @Override
     public void onBind() {
-        mText.setText(mItem.getFile().getName());
+        mName.setText(mItem.getFile().getName());
+        mIsCurrentContinuedLogFile.setVisibility(mItem.getFile().equals(Common.getCurrentContinuedLogFile()) ? View.VISIBLE : View.GONE);
     }
 
     @Override

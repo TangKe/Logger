@@ -13,6 +13,8 @@ interface ILoggerService {
 
     void addLog(in Log log);
 
+    void setAutoClearThresholdFileSize(long size);
+
     void registerCallback(ILoggerServiceCallback callback);
     void unregisterCallback(ILoggerServiceCallback callback);
 }

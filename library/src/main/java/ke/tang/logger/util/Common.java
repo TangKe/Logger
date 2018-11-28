@@ -14,13 +14,23 @@ import ke.tang.logger.R;
  */
 
 public class Common {
+    private volatile static File sCurrentContinuedLogFile;
+
+    public static File getCurrentContinuedLogFile() {
+        return sCurrentContinuedLogFile;
+    }
+
+    public static void setCurrentContinuedLogFile(File currentContinuedLogFile) {
+        sCurrentContinuedLogFile = currentContinuedLogFile;
+    }
+
     public static File getTraceLogFileDirectory(Context context) {
         final File trace = new File(getLoggerDirectory(context), "trace");
         trace.mkdirs();
         return trace;
     }
 
-    public static File getContinuedFileDirectory(Context context) {
+    public static File getContinuedLogFileDirectory(Context context) {
         final File log = new File(getLoggerDirectory(context), "continued");
         log.mkdirs();
         return log;

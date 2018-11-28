@@ -45,9 +45,9 @@ public class LogManageActivity extends AppCompatActivity implements NavigationVi
         mDrawer.addDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mContinuedLogManageFragment = LogManageFragment.newInstance(this, Common.getContinuedFileDirectory(this));
+        mContinuedLogManageFragment = LogManageFragment.newInstance(this, Common.getContinuedLogFileDirectory(this));
         mTraceLogManageFragment = LogManageFragment.newInstance(this, Common.getTraceLogFileDirectory(this));
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, mTraceLogManageFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, mContinuedLogManageFragment).commit();
     }
 
     @Override

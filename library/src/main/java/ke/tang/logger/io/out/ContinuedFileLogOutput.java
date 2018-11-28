@@ -46,13 +46,16 @@ public class ContinuedFileLogOutput extends FileLogOutput {
             mYear = calendar.get(Calendar.YEAR);
             mMonth = calendar.get(Calendar.MONTH);
             mDay = calendar.get(Calendar.DAY_OF_MONTH);
-            setFile(new File(Common.getContinuedFileDirectory(mContext), Common.buildContinuedLogFileName(mContext, calendar.getTimeInMillis())));
+            File continuedLogFile = new File(Common.getContinuedLogFileDirectory(mContext), Common.buildContinuedLogFileName(mContext, calendar.getTimeInMillis()));
+            setFile(continuedLogFile);
+            Common.setCurrentContinuedLogFile(continuedLogFile);
         }
     }
 
     @Override
     public void close() {
         super.close();
+        Common.setCurrentContinuedLogFile(null);
         mContext.unregisterReceiver(mTimeReceiver);
     }
 }

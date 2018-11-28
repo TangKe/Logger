@@ -28,4 +28,5 @@
     <string name="logger_action_continued_log">持续记录的日志</string>
     <string name="logger_log_file_name_pattern">yyyy年MM月dd日HH时mm分ss秒</string>
     <string name="logger_continued_log_file_name_pattern">yyyy年MM月dd日</string>
+    <string name="logger_current">当前</string>
 </resources>

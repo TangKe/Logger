@@ -26,4 +26,5 @@
     <string name="logger_action_continued_log">Continued record log</string>
     <string name="logger_log_file_name_pattern">yyyy-MM-dd HH:mm:ss</string>
     <string name="logger_continued_log_file_name_pattern">yyyy-MM-dd</string>
+    <string name="logger_current">Current</string>
 </resources>

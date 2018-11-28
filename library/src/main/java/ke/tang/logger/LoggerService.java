@@ -12,6 +12,7 @@ import android.support.v4.content.FileProvider;
 import java.io.File;
 
 import ke.tang.logger.executor.CustomLogWriteExecutor;
+import ke.tang.logger.executor.LogFileClearExecutor;
 import ke.tang.logger.executor.LogReadExecutor;
 import ke.tang.logger.executor.LogReadThreadExecutor;
 import ke.tang.logger.executor.LogWriteExecutor;
@@ -42,6 +43,7 @@ public class LoggerService extends Service {
 
     private LogReadExecutor mRead;
     private LogWriteExecutor mWrite;
+    private LogFileClearExecutor mClear;
     private CustomLogWriteExecutor mCustom;
     private int mStatus = STATUS_IDLE;
 
@@ -103,6 +105,13 @@ public class LoggerService extends Service {
         public void addLog(Log log) {
             mCustom.addLog(log);
         }
+
+        @Override
+        public void setAutoClearThresholdFileSize(long size) throws RemoteException {
+            if (null != mClear) {
+                mClear.setAutoClearThresholdFileSize(size);
+            }
+        }
     };
 
     @Override
@@ -115,11 +124,13 @@ public class LoggerService extends Service {
         super.onCreate();
         mRead = new LogReadThreadExecutor(mLogQueue);
         mWrite = new LogWriteThreadExecutor(mLogQueue);
+        mClear = new LogFileClearExecutor(this);
         mCustom = new CustomLogWriteExecutor(mLogQueue);
         mWrite.addLogOutput(new ContinuedFileLogOutput(this));
         mRead.setLogInput(new LogCatInput());
         mRead.start();
         mWrite.start();
+        mClear.start();
         mCustom.start();
         setStatus(STATUS_RUNNING);
     }

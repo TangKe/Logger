@@ -154,6 +154,21 @@ public class Logger {
     }
 
     /**
+     * 设置自动清除日志文件大小，小于等于0则不清除，不会删除当前正在写入的日志文件
+     *
+     * @param size
+     */
+    public static void setAutoClearThresholdFileSize(long size) {
+        if (ensureConnection()) {
+            try {
+                sLoggerServiceInterface.setAutoClearThresholdFileSize(size);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * 确保日志服务是启动的并连接上的
      *
      * @return true是连接上的, false没连接上，并发起连接
