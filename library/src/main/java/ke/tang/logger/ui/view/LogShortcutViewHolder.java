@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
@@ -47,7 +48,8 @@ public class LogShortcutViewHolder {
     }
 
     public void getShortcutCoordinator(Point outPoint) {
-        outPoint.set(mShortcut.getLeft(), mShortcut.getTop());
+        final AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) mShortcut.getLayoutParams();
+        outPoint.set(layoutParams.x, layoutParams.y);
     }
 
     private void updateStatus() {
@@ -64,10 +66,10 @@ public class LogShortcutViewHolder {
         HandlerUtils.sMainHandler.post(new Runnable() {
             @Override
             public void run() {
-                ViewCompat.offsetLeftAndRight(mShortcut, -mShortcut.getLeft());
-                ViewCompat.offsetTopAndBottom(mShortcut, -mShortcut.getTop());
-                ViewCompat.offsetLeftAndRight(mShortcut, inPoint.x);
-                ViewCompat.offsetTopAndBottom(mShortcut, inPoint.y);
+                final AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) mShortcut.getLayoutParams();
+                layoutParams.x = inPoint.x;
+                layoutParams.y = inPoint.y;
+                mShortcut.setLayoutParams(layoutParams);
             }
         });
     }

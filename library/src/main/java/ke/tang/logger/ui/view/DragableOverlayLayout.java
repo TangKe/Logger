@@ -6,17 +6,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 
 /**
  * @author tangke
  */
 
-public class DragableOverlayLayout extends FrameLayout {
+public class DragableOverlayLayout extends AbsoluteLayout {
 
     private ViewDragHelper mDragHelper;
+    private View mReleasedView;
 
     private ViewDragHelper.Callback mCallback = new ViewDragHelper.Callback() {
         @Override
@@ -47,13 +51,13 @@ public class DragableOverlayLayout extends FrameLayout {
 
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            mReleasedView = releasedChild;
             final int left = releasedChild.getLeft();
             final int top = releasedChild.getTop();
             final int width = getWidth();
             final int height = getHeight();
             final boolean moveHorizontal = Math.min(left, width - left) < Math.min(top, height - top);
-            mDragHelper.smoothSlideViewTo(releasedChild,
-                    moveHorizontal ? left < width / 2 ? 0 : width - releasedChild.getWidth() : left,
+            mDragHelper.settleCapturedViewAt(moveHorizontal ? left < width / 2 ? 0 : width - releasedChild.getWidth() : left,
                     moveHorizontal ? top : top < height / 2 ? 0 : height - releasedChild.getHeight());
             ViewCompat.postInvalidateOnAnimation(DragableOverlayLayout.this);
         }
@@ -87,6 +91,14 @@ public class DragableOverlayLayout extends FrameLayout {
     public void computeScroll() {
         if (mDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
+        } else if (null != mReleasedView) {
+            final AbsoluteLayout.LayoutParams layoutParams = (LayoutParams) mReleasedView.getLayoutParams();
+            final int top = mReleasedView.getTop();
+            final int left = mReleasedView.getLeft();
+            layoutParams.y = top;
+            layoutParams.x = left;
+            mReleasedView.setLayoutParams(layoutParams);
+            mReleasedView = null;
         }
     }
 }

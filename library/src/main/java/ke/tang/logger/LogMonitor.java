@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,9 @@ import ke.tang.logger.util.Intents;
 
 class LogMonitor {
     static Context sApplicationContext;
+    private final static String PREFERENCE_LOG_MONITOR = "LogMonitorPreferences";
+    private final static String KEY_COORDINATOR_X = "CoordinatorX";
+    private final static String KEY_COORDINATOR_Y = "CoordinatorY";
     private static LogMonitorLifecycleCallbacks sLogMonitorLifecycleCallbacks = new LogMonitorLifecycleCallbacks();
 
     private static WeakHashMap<Activity, LogShortcutViewHolder> sViewWeakHashMap = new WeakHashMap<>();
@@ -33,6 +37,7 @@ class LogMonitor {
     private static WeakReference<Activity> sCurrentResumedActivity;
 
     private static Point sShortcutCoordinator = new Point();
+    private static SharedPreferences sSettings;
     private static boolean sInEnable;
 
     private static int sServiceStatus;
@@ -66,6 +71,8 @@ class LogMonitor {
     @InjectContext
     static void onContextReady(Context context) {
         sApplicationContext = context;
+        sSettings = context.getSharedPreferences(PREFERENCE_LOG_MONITOR, Context.MODE_PRIVATE);
+        restoreCoordinator();
         registerCallback();
     }
 
@@ -73,6 +80,16 @@ class LogMonitor {
         if (sApplicationContext instanceof Application) {
             ((Application) sApplicationContext).registerActivityLifecycleCallbacks(sLogMonitorLifecycleCallbacks);
         }
+    }
+
+    private static void restoreCoordinator() {
+        if (sSettings.contains(KEY_COORDINATOR_X)) {
+            sShortcutCoordinator.set(sSettings.getInt(KEY_COORDINATOR_X, 0), sSettings.getInt(KEY_COORDINATOR_Y, 0));
+        }
+    }
+
+    private static void persistCoordinator() {
+        sSettings.edit().putInt(KEY_COORDINATOR_X, sShortcutCoordinator.x).putInt(KEY_COORDINATOR_Y, sShortcutCoordinator.y).commit();
     }
 
     public static void enable() {
@@ -89,6 +106,7 @@ class LogMonitor {
     public static void disable() {
         sInEnable = false;
         Logger.unregisterCallback(ILoggerServiceCallback.Stub.asInterface(sCallback));
+        saveShortcutStatus();
         updateShortStatus();
     }
 
@@ -127,6 +145,7 @@ class LogMonitor {
             LogShortcutViewHolder holder = sViewWeakHashMap.get(sCurrentResumedActivity.get());
             if (null != holder) {
                 holder.getShortcutCoordinator(sShortcutCoordinator);
+                persistCoordinator();
             }
         }
     }
